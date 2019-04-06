@@ -27,7 +27,7 @@ body {
     border-radius: 25px;
     margin-top: 20px;
 }
-#questionCard {
+#questionCard1,#questionCard2, #questionCard3, #questionCard4 {
     margin-right: 30px;
     margin-left: 25px;
     background-color: wheat;
@@ -35,6 +35,7 @@ body {
     width: 45%;
     margin-top: 50px;
     float: left;
+    border-radius: 25px;
 }
 
 #question {
@@ -45,4 +46,8 @@ body {
     font-size: 20px;
     text-align: center;
     margin-top: 5px;
+}
+button{
+    margin-top: 25px;
+
 }

@@ -1,9 +1,9 @@
 var questionDiv = $("#question");
 var answerDivArr = [
-    $("#q1"),
-    $("#q2"),
-    $("#q3"),
-    $("#q4")
+    $("#questionCard1"),
+    $("#questionCard2"),
+    $("#questionCard3"),
+    $("#questionCard4")
 ]
 
 
@@ -59,7 +59,7 @@ let questions = [
         ]
     },
     {
-        questions: "Who was the enemy of Rome during the Punic Wars?",
+        question: "Who was the enemy of Rome during the Punic Wars?",
         correctAnswer: "Carthage",
         answers: [
             "Greece",
@@ -99,19 +99,114 @@ $(document).ready(function() {
         gameStart();
     });
 
+    $(document).on("click", '#next', function(){
+        nextRound(questions[0]);
+    });
 
 });
 
 function gameStart() {
     questions = shuffle(questions);
+    shuffle(questions[0].answers);
     roundStart(questions[0]);
-    
 }
 
+
 function roundStart(roundObject) {
+  
     $(questionDiv).text(roundObject.question);
 
     for(let i = 0; i < roundObject.answers.length; i++){
-        $(answerDivArr[i]).text(roundObject.answers[i]);
+        $(answerDivArr[i]).find('p').text(roundObject.answers[i]);
     }
+
+    $("#questionCard1").on("click", function(){
+
+        if ($(this).find('p').text() === roundObject.correctAnswer) {
+            $(this).css("background-color","lightgreen");
+            $(this).css("color","white");
+        }
+        else {
+            $(this).css("background-color","red");
+            $(this).css("color","white");
+        }
+        removeClick();
+        addBtn();
+    });
+    $("#questionCard2").on("click", function(){
+
+        if ($(this).find('p').text() === roundObject.correctAnswer) {
+            $(this).css("background-color","lightgreen");
+            $(this).css("color","white");
+        }
+        else {
+            $(this).css("background-color","red");
+            $(this).css("color","white");
+        }
+        removeClick();
+        addBtn();
+    });
+    $("#questionCard3").on("click", function(){
+
+        if ($(this).find('p').text() === roundObject.correctAnswer) {
+            $(this).css("background-color","lightgreen");
+            $(this).css("color","white");
+        }
+        else {
+            $(this).css("background-color","red");
+            $(this).css("color","white");
+        }
+        removeClick();
+        addBtn();
+    });
+    $("#questionCard4").on("click", function(){
+
+        if ($(this).find('p').text() === roundObject.correctAnswer) {
+            $(this).css("background-color","lightgreen");
+            $(this).css("color","white");
+        }
+        else {
+            $(this).css("background-color","red");
+            $(this).css("color","white");
+        }
+        removeClick();
+        addBtn();
+    });
+
+}
+
+
+function addBtn() {
+    var btnDiv = $('<div class="container" id="nextRoundContainer"></div>')
+    var nextBtn = $('<button type="button" class="btn btn-danger" id="next" >Next Round</button>');
+
+    $('#main').append(btnDiv);
+    $('#nextRoundContainer').append(nextBtn);
+}
+
+function removeClick() {
+    answerDivArr.forEach(function(element) {
+        $(element).off('click');
+    })
+}
+
+
+function nextRound(roundObject) {
+
+    debugger
+    //remove last round
+    let index = questions.indexOf(roundObject);
+    questions.splice(index, 1);
+    //remove next round button
+    $("#next").remove();
+    
+    answerDivArr.forEach(function(element){
+        $(element).css("background-color", "wheat");
+        $(element).css("color", "black");
+    });
+
+    if(questions.length > 0) {
+        gameStart();
+    }
+
 }
