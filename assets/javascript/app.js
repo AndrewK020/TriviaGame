@@ -88,6 +88,7 @@ let score = {
     correct: 0,
     incorrect: 0
 }
+var time = 0;
 
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -119,7 +120,9 @@ $(document).ready(function() {
 function gameStart() {
     questions = shuffle(questions);
     shuffle(questions[0].answers);
+    startTime();
     roundStart(questions[0]);
+
 }
 
 
@@ -251,9 +254,28 @@ function endGame() {
 }
 
 function resetGame() {
-   // $('#page').html(origionalState);
     document.location.reload(true);
     questions = origionalQuestions;
     score.correct = 0;
     score.incorrect =0;
 }
+
+function startTime() {
+    let timeDiv = $('<div id="time">10</div>');
+    $(".jumbotron").append(timeDiv);
+    time = 10;
+    interval= setInterval(count, 1000);
+}
+
+function count() {
+    if (time > 0) {
+        time--;
+        $("#time").text(time);
+    }
+   else {
+       clearTimeout(interval);
+   }
+  }
+
+  
+  

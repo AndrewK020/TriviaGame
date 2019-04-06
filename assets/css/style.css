@@ -31,7 +31,7 @@ body {
     margin-right: 30px;
     margin-left: 25px;
     background-color: wheat;
-    height: 100px;
+    height: 12%;
     width: 45%;
     margin-top: 50px;
     float: left;
@@ -49,5 +49,8 @@ body {
 }
 button{
     margin-top: 25px;
+}
 
+#time {
+    text-align: center;
 }
