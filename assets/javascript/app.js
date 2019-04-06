@@ -6,7 +6,7 @@ var answerDivArr = [
     $("#questionCard4")
 ]
 
-
+//an array of question objects with the question, possible answers, and the correct answer
 let questions = [
     {
         question: "Who founded the city of Rome in 753BC?",
@@ -90,6 +90,7 @@ let score = {
 }
 var time = 0;
 
+//shuffles an array
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
