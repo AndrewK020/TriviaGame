@@ -148,6 +148,7 @@ function roundStart(roundObject) {
         }
         removeClick();
         addBtn();
+        stopTimer();
     });
     $("#questionCard2").on("click", function(){
 
@@ -163,6 +164,7 @@ function roundStart(roundObject) {
         }
         removeClick();
         addBtn();
+        stopTimer();
     });
     $("#questionCard3").on("click", function(){
 
@@ -178,6 +180,7 @@ function roundStart(roundObject) {
         }
         removeClick();
         addBtn();
+        stopTimer();
     });
     $("#questionCard4").on("click", function(){
 
@@ -189,10 +192,11 @@ function roundStart(roundObject) {
         else {
             $(this).css("background-color","red");
             $(this).css("color","white");
-            score.correct++;
+            score.incorrect++;
         }
         removeClick();
         addBtn();
+        stopTimer();
     });
 
 }
@@ -249,6 +253,8 @@ function endGame() {
     $(scoreDiv).append(correctP);
     $(scoreDiv).append(incorrectP);
 
+    $("#time").text('');
+
     $(questionDiv).append(scoreDiv);
     $('#main').append(resetBtn);
 }
@@ -261,6 +267,8 @@ function resetGame() {
 }
 
 function startTime() {
+    $("#time").remove();
+
     let timeDiv = $('<div id="time">10</div>');
     $(".jumbotron").append(timeDiv);
     time = 10;
@@ -274,8 +282,22 @@ function count() {
     }
    else {
        clearTimeout(interval);
+       timeRunOut();
    }
   }
 
-  
+function stopTimer() {
+    clearTimeout(interval);
+}
+
+  function timeRunOut() {
+    clearTimeout(interval);
+    answerDivArr.forEach(function(element) {
+        $(element).css("background-color","red");
+            $(element).css("color","white");
+    });
+    score.incorrect++;
+    removeClick();
+    addBtn();
+  }
   
