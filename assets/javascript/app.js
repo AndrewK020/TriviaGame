@@ -81,6 +81,14 @@ let questions = [
 
 ];
 
+const origionalQuestions = questions;
+const origionalState = $('#page').clone();
+
+let score = {
+    correct: 0,
+    incorrect: 0
+}
+
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -101,6 +109,9 @@ $(document).ready(function() {
 
     $(document).on("click", '#next', function(){
         nextRound(questions[0]);
+    });
+    $(document).on("click", "#reset", function() {
+        resetGame();
     });
 
 });
@@ -125,10 +136,12 @@ function roundStart(roundObject) {
         if ($(this).find('p').text() === roundObject.correctAnswer) {
             $(this).css("background-color","lightgreen");
             $(this).css("color","white");
+            score.correct++;
         }
         else {
             $(this).css("background-color","red");
             $(this).css("color","white");
+            score.incorrect++;
         }
         removeClick();
         addBtn();
@@ -138,10 +151,12 @@ function roundStart(roundObject) {
         if ($(this).find('p').text() === roundObject.correctAnswer) {
             $(this).css("background-color","lightgreen");
             $(this).css("color","white");
+            score.correct++;
         }
         else {
             $(this).css("background-color","red");
             $(this).css("color","white");
+            score.incorrect++;
         }
         removeClick();
         addBtn();
@@ -151,10 +166,12 @@ function roundStart(roundObject) {
         if ($(this).find('p').text() === roundObject.correctAnswer) {
             $(this).css("background-color","lightgreen");
             $(this).css("color","white");
+            score.correct++;
         }
         else {
             $(this).css("background-color","red");
             $(this).css("color","white");
+            score.incorrect++;
         }
         removeClick();
         addBtn();
@@ -164,10 +181,12 @@ function roundStart(roundObject) {
         if ($(this).find('p').text() === roundObject.correctAnswer) {
             $(this).css("background-color","lightgreen");
             $(this).css("color","white");
+            score.correct++;
         }
         else {
             $(this).css("background-color","red");
             $(this).css("color","white");
+            score.correct++;
         }
         removeClick();
         addBtn();
@@ -193,7 +212,6 @@ function removeClick() {
 
 function nextRound(roundObject) {
 
-    debugger
     //remove last round
     let index = questions.indexOf(roundObject);
     questions.splice(index, 1);
@@ -208,5 +226,34 @@ function nextRound(roundObject) {
     if(questions.length > 0) {
         gameStart();
     }
+    else {
+        endGame();
+    }
 
+}
+
+function endGame() {
+    $(questionDiv).empty();
+
+    answerDivArr.forEach(function(element){
+        $(element).remove();
+    });
+    let scoreDiv = $('<div class="container"></div>')
+    let correctP = $('<p>').text("Correct Answers: " + score.correct);
+    let incorrectP = $('<p>').text("Incorrect Answers: " + score.incorrect);
+    let resetBtn = $('<button type="button" class="btn btn-primary btn-lg" id="reset" >Play Again!</button>');
+
+    $(scoreDiv).append(correctP);
+    $(scoreDiv).append(incorrectP);
+
+    $(questionDiv).append(scoreDiv);
+    $('#main').append(resetBtn);
+}
+
+function resetGame() {
+   // $('#page').html(origionalState);
+    document.location.reload(true);
+    questions = origionalQuestions;
+    score.correct = 0;
+    score.incorrect =0;
 }
